@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sun Jul 15 01:05:58 2018
-
 @author: Nzix
 """
 
@@ -88,6 +87,7 @@ def dump(file_path):
     # media data
     file_name = meta_data['musicName'] + '.' + meta_data['format']
     m = open(os.path.join(os.path.split(file_path)[0],file_name),'wb')
+    print(os.path.join(os.path.split(file_path)[0],file_name))
 
     chunk = bytearray()
     while True:
@@ -97,7 +97,7 @@ def dump(file_path):
             break
 
         for i in range(chunk_length):
-            j = (i + 1) & 0xff;
+            j = (i + 1) & 0xff
             chunk[i] ^= key_box[(key_box[j] + key_box[(key_box[j] + j) & 0xff]) & 0xff]
 
         m.write(chunk)
@@ -106,12 +106,20 @@ def dump(file_path):
     f.close()
 
 if __name__ == '__main__':
-    import sys
-    if len(sys.argv) > 1:
-        for file_path in sys.argv[1:]:
+    #import sys
+    #if len(sys.argv) > 1:
+    import os
+
+    g = os.walk(r"f:\新建文件夹")
+
+    for path, dir_list, file_list in g:
+        for file_name in file_list:
+          if '.ncm' in file_name:
             try:
-                dump(file_path)
+                dump(os.path.join(path, file_name))
+                print(os.path.join(path, file_name))
             except:
                 pass
-    else:
-        print('please input file path!')
+
+    #for file_path in :
+    #    dump(file_path)
