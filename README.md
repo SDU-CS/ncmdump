@@ -10,8 +10,10 @@
 pip(3) install pycrypto
 ```
 
+
 ## 使用
 
-```
-python(3) ncmdump.py [files ...]
-```
+修改了原先的读取文件模块，现在只需要把存放ncm文件的文件夹路径指定就可以遍历文件夹内的全部ncm文件并转换成mp3或者flac文件
+
+
+
